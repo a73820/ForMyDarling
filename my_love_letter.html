@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .heart-container {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .heart-container:hover {
+            transform: scale(1.1);
+        }
+        
+        .heart-container.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        
+        .heart {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 160px;
+            background: #ff6b9d;
+            border-radius: 100px 100px 0 0;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.5);
+        }
+        
+        .heart::before {
+            left: 100px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.1); }
+            20%, 40% { transform: scale(1); }
+        }
+        
+        .open-text {
+            margin-top: 50px;
+            font-family: 'Great Vibes', cursive;
+            font-size: 48px;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        .letter-container {
+            position: absolute;
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh;
+            background: #fff9f0;
+            padding: 60px 50px;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: scale(0.8) rotateX(-90deg);
+            pointer-events: none;
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            overflow-y: auto;
+        }
+        
+        .letter-container.show {
+            opacity: 1;
+            transform: scale(1) rotateX(0);
+            pointer-events: all;
+        }
+        
+        .letter-content {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .letter-content h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 56px;
+            color: #ff6b9d;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+        
+        .letter-content p {
+            margin-bottom: 20px;
+            text-indent: 30px;
+        }
+        
+        .letter-content .signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 36px;
+            text-align: right;
+            margin-top: 40px;
+            color: #667eea;
+            text-indent: 0;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff6b9d;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 107, 157, 0.4);
+            transition: transform 0.2s ease;
+        }
+        
+        .close-btn:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart-container" id="heartContainer">
+            <div class="heart"></div>
+            <div class="open-text">Open it</div>
+        </div>
+        
+        <div class="letter-container" id="letterContainer">
+            <button class="close-btn" id="closeBtn">✕</button>
+            <div class="letter-content">
+                <h1>Mi amada novia</h1>
+                
+                <p>Hace hoy 1 año y 5 meses que nos hicimos novios, y qué bueno que tuve coraje para pedir que seas mi novia.</p>
+                
+                <p>Contigo he pasado los mejores momentos de mi vida y voy a pasar muchos más.</p>
+                
+                <p>Yo nunca pensé que encontraría alguien como tú, ni en mis mejores sueños, pero qué bueno que te encontré.</p>
+                
+                <p>Tu corazón es la cosas que más me encanta en ti, me gusta cuando estás borrachita porque hablas con el corazón.</p>
+                
+                <p>Extraño sentir tus besos, tus abraços y el calor reconfortante que me das. Está frio acá entonces solo pienso en como queria que estés acá para poder dormir abraçado contigo.</p>
+                
+                <p>También me gusta de temas que densos contigo, como política, religión o otros, siento que solo contigo puedo contar mi real opinión o sentimientos, se siente bien hablar desas cosas con alguién que no te va jusgar mismo que no concuerde al 100 por ciento.</p>
+                
+                <p>Te quiero hacer la mujer más feliz del mundo y tener una linda vida juntos.</p>
+                
+                <p>Escribo esta cartita del fondo de mi corazón. </p>
+
+                <p>Gracias por ser esta mujer increíble, tan dulce y tan linda.</p>
+
+                <p class="signature">Tu Churritos❤️</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const heartContainer = document.getElementById('heartContainer');
+        const letterContainer = document.getElementById('letterContainer');
+        const closeBtn = document.getElementById('closeBtn');
+        
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+        
+        heartContainer.addEventListener('click', () => {
+            heartContainer.classList.add('hidden');
+            setTimeout(() => {
+                letterContainer.classList.add('show');
+                
+                // Create multiple floating hearts
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => createFloatingHeart(), i * 200);
+                }
+                
+                // Continue creating hearts periodically
+                const heartInterval = setInterval(() => {
+                    createFloatingHeart();
+                }, 800);
+                
+                // Store interval ID to clear it later
+                letterContainer.heartInterval = heartInterval;
+            }, 300);
+        });
+        
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            letterContainer.classList.remove('show');
+            
+            // Clear the heart interval
+            if (letterContainer.heartInterval) {
+                clearInterval(letterContainer.heartInterval);
+            }
+            
+            setTimeout(() => {
+                heartContainer.classList.remove('hidden');
+            }, 500);
+        });
+    </script>
+</body>
+</html>
